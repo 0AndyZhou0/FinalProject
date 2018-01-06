@@ -34,4 +34,10 @@ public class Box{
     public int getValue(){
 	return value;
     }
+
+    public void hinted(int ans){
+	if(mutable){
+	    value = ans;
+	}
+    }
 }
