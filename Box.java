@@ -4,7 +4,7 @@ public class Box{
     /**
      *Creates an empty box.
      */
-    public Box{
+    public Box(){
 	value = 0;
 	mutable = true;
     }
@@ -14,7 +14,7 @@ public class Box{
      */
     public Box(int num){
 	if(num < 0 || num > 9){
-	    throw IndexOutOfBoundsException("You put in an unsupported value, baka");
+	    throw new IndexOutOfBoundsException("You put in an unsupported value, baka");
 	}
 	value = num;
 	mutable = false;
