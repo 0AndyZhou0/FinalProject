@@ -1,4 +1,5 @@
 public class Sudoku{
+    
     public static void main(String[] args){
 	Sudoku a = new Sudoku();
 	a.display();
@@ -21,6 +22,16 @@ public class Sudoku{
 		line += data[i][x].getValue() + " ";
 	    }
 	    System.out.println(line);
+	}
+    }
+
+    private String toString(){
+	String line = "";
+	for(int i = 0;i < 9;i++){
+	    for(int x = 0;x < 9;x++){
+		line += data[i][x].getValue() + " ";
+	    }
+	    line = line + "\n";
 	}
     }
 }
