@@ -1,10 +1,6 @@
 public class Sudoku{
-    
-    public static void main(String[] args){
-	Sudoku a = new Sudoku();
-	a.display();
-    }
-    private Box[][] data;
+
+    private Box[][] data;    
 
     public Sudoku(){
 	data = new Box[9][9];
@@ -34,6 +30,14 @@ public class Sudoku{
 	    line = line + "\n";
 	}
     }
+
+    public static void main(String[] args){
+	Sudoku a = new Sudoku();
+	String str = a.toString();
+	System.out.println(str);
+    }
+
+    
 }
 
 		    
