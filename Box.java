@@ -14,23 +14,27 @@ public class Box{
      */
     public Box(int num){
 	if(num < 0 || num > 9){
-	    throw new IndexOutOfBoundsException("You put in an unsupported value, baka");
+	    throw new IndexOutOfBoundsException("You put in an unsupported value, this command takes integers 0 - 9");
 	}
 	value = num;
 	mutable = false;
     }
+    
     /**
      *changes the value of a mutable box.
      */
+
     public void setValue(int num){
 	if(mutable = true){
 	    value = num;
 	}
     }
+    
     /**
      *returns the value of the current box.
      *returns 0 if no value present.
      */
+    
     public int getValue(){
 	return value;
     }
