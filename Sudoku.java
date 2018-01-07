@@ -21,19 +21,20 @@ public class Sudoku{
 	}
     }
 
-    private String toString(){
-	String line = "";
-	for(int i = 0;i < 9;i++){
-	    for(int x = 0;x < 9;x++){
-		line += data[i][x].getValue() + " ";
-	    }
-	    line = line + "\n";
-	}
+    private String makeString(){
+    	String line = "";
+    	for(int i = 0;i < 9;i++){
+    	    for(int x = 0;x < 9;x++){
+    		line += data[i][x].getValue() + " ";
+    	    }
+    	    line = line + "\n";
+    	}
+	return line;
     }
 
     public static void main(String[] args){
 	Sudoku a = new Sudoku();
-	String str = a.toString();
+	String str = a.makeString();
 	System.out.println(str);
     }
 
