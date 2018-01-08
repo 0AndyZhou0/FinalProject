@@ -20,7 +20,7 @@ public class Sudoku{
 	data = new Box[9][9];
 	for(int i = 0;i < 9;i++){
 	    for(int x = 0;x < 9;x++){
-		//data[i][x] = a;
+	        
 	    }
 	}
     }
