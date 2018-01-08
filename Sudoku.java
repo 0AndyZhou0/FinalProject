@@ -2,7 +2,11 @@ public class Sudoku{
     public static void main(String[] args){
 	Sudoku a = new Sudoku();
 	String str = a.makeString();
-	System.out.println(str);
+        do{
+
+	} while{
+	    
+	}
     }
     
     private Box[][] data;    
@@ -20,7 +24,7 @@ public class Sudoku{
 	data = new Box[9][9];
 	for(int i = 0;i < 9;i++){
 	    for(int x = 0;x < 9;x++){
-		data[i][x] = a.get(i,x);
+		data[i][x] = new Box(a.get(i,x));
 	    }
 	}
     }
