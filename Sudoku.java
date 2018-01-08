@@ -38,7 +38,9 @@ public class Sudoku{
 	System.out.println(str);
     }
 
-    
+    private void set(int row,int col,int num){
+	data[row][col].setValue(num);
+    }
 }
 
 		    
