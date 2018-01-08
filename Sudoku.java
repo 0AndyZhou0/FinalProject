@@ -1,5 +1,10 @@
 public class Sudoku{
-
+    public static void main(String[] args){
+	Sudoku a = new Sudoku();
+	String str = a.makeString();
+	System.out.println(str);
+    }
+    
     private Box[][] data;    
 
     public Sudoku(){
@@ -32,15 +37,11 @@ public class Sudoku{
 	return line;
     }
 
-    public static void main(String[] args){
-	Sudoku a = new Sudoku();
-	String str = a.makeString();
-	System.out.println(str);
-    }
-
     private void set(int row,int col,int num){
 	data[row][col].setValue(num);
     }
+
+    
 }
 
 		    
