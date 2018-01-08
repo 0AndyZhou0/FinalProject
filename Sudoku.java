@@ -15,6 +15,15 @@ public class Sudoku{
 	    }
 	}
     }
+
+    public Sudoku(Sudoku a){
+	data = new Box[9][9];
+	for(int i = 0;i < 9;i++){
+	    for(int x = 0;x < 9;x++){
+		//data[i][x] = a;
+	    }
+	}
+    }
     
     private void display(){
 	for(int i = 0;i < 9;i++){
@@ -41,7 +50,9 @@ public class Sudoku{
 	data[row][col].setValue(num);
     }
 
-    
+    private int get(int row,int col){
+	return data[row][col].getValue();
+    }
 }
 
 		    
