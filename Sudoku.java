@@ -1,4 +1,5 @@
 public class Sudoku{
+    
     public static void main(String[] args){
 	Sudoku a = new Sudoku();
 	String str = a.makeString();
