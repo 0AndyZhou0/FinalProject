@@ -1,8 +1,25 @@
 public class Sudoku{
     
     public static void main(String[] args){
-	Sudoku a = new Sudoku();
-	String str = a.makeString();
+	int[][] ary  = new int[9][9];	
+	for(int x = 0; x < ary.length; x++){
+	    for(int y = 0; y < ary[0].length; y++){
+		ary[x][y] = x;
+	    }
+	}
+	Box[][] items = convert(ary);
+	String str = "";
+	for(int x = 0; x < items.length; x++){
+	    for(int y = 0; y < items[0].length; y++){
+		str = str + items[x][y] + "";
+	    }
+	}
+	System.out.println(str);
+
+	// Sudoku a = new Sudoku();
+	// String str = a.makeString();
+	// System.out.println(str);
+	
         // do{
 
 	// } while{
@@ -59,7 +76,7 @@ public class Sudoku{
 	return data[row][col].getValue();
     }
 
-    private Box[][] convert(int[][] ary){
+    private static  Box[][] convert(int[][] ary){
 	Box[][] a = new Box[ary.length][ary[0].length];
 	for(int x = 0; x < ary.length; x++){
 	    for(int y = 0; y < ary[0].length; y++){
