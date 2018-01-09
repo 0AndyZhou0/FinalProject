@@ -58,6 +58,15 @@ public class Sudoku{
     private int get(int row,int col){
 	return data[row][col].getValue();
     }
+
+    private Box[][] convert(int[][] ary){
+	Box[][] a = new Box[ary.length][ary[0].length];
+	for(int x = 0; x < ary.length; x++){
+	    for(int y = 0; y < ary[].length){
+		a[x][y] = newBox(ary[x][y]);
+	    }
+	}
+    }
 }
 
 		    
