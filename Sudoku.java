@@ -3,11 +3,11 @@ public class Sudoku{
     public static void main(String[] args){
 	Sudoku a = new Sudoku();
 	String str = a.makeString();
-        do{
+        // do{
 
-	} while{
+	// } while{
 	    
-	}
+	// }
     }
     
     private Box[][] data;    
@@ -62,10 +62,11 @@ public class Sudoku{
     private Box[][] convert(int[][] ary){
 	Box[][] a = new Box[ary.length][ary[0].length];
 	for(int x = 0; x < ary.length; x++){
-	    for(int y = 0; y < ary[].length){
-		a[x][y] = newBox(ary[x][y]);
+	    for(int y = 0; y < ary[0].length; y++){
+		a[x][y] = new Box(ary[x][y]);
 	    }
 	}
+	return a;
     }
 }
 
