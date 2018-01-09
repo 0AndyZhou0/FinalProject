@@ -57,6 +57,19 @@ public class Sudoku{
     private int get(int row,int col){
 	return data[row][col].getValue();
     }
+
+    private boolean isSolved(){
+	for(int i = 0;i < 9;i++){
+	    int sum = 0;
+	    for (int x = 0;x < 9;x++){
+		sum += data[i][x];
+	    }
+	    if(sum != 45){
+		return false;
+	    }
+	}
+	return true;
+    }
 }
 
 		    
