@@ -57,7 +57,9 @@ public class Box{
 	}
     }
 
-
+    public String toString(){
+	return getValue() + "";
+    }
 
     
 }
