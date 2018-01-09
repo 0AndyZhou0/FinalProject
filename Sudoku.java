@@ -1,12 +1,14 @@
 public class Sudoku{
     public static void main(String[] args){
 	Sudoku a = new Sudoku();
-	String str = a.makeString();
+	a.display();
+	/*
         do{
-
+	    
 	} while{
 	    
 	}
+	*/
     }
     
     private Box[][] data;    
@@ -33,7 +35,7 @@ public class Sudoku{
 	for(int i = 0;i < 9;i++){
 	    String line = "";
 	    for(int x = 0;x < 9;x++){
-		line += data[i][x].getValue() + " ";
+		line += data[i][x] + " ";
 	    }
 	    System.out.println(line);
 	}
