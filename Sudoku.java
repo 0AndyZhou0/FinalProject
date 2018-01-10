@@ -18,10 +18,10 @@ public class Sudoku{
 	// System.out.println(str);
 
 	Sudoku a = new Sudoku();
-	String str = a.makeString();
-	System.out.println(str);
+        a.display();
+	a.set(0,4,0);
 	System.out.println(a.isValidRow(0,0));
-
+	
 	int[][] ary  = new int[9][9];	
 	for(int x = 0; x < ary.length; x++){
 	    for(int y = 0; y < ary[0].length; y++){
@@ -29,8 +29,7 @@ public class Sudoku{
 	    }
 	}
 	Box[][] items = convert(ary);
-	String str = makeString(items);
-	System.out.println(str);
+        a.display();
 
 	// Sudoku a = new Sudoku();
 	// a.display();
@@ -103,13 +102,14 @@ public class Sudoku{
 
 
     private boolean isValidRow(int x, int y){
-	for(int col = 0; col < data[x].length; col++){
+	for(int col = 0;col < 9;col++){
 	    if(col != y){
 		if (data[x][y].getValue() == data[x][col].getValue()){
 		    return false;
 		}
 	    }
 	}
+	return true;
     }
 
     private boolean isSolved(){
