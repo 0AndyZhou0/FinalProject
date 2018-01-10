@@ -1,24 +1,25 @@
 public class Sudoku{
     
     public static void main(String[] args){
-	int[][] ary  = new int[9][9];	
-	for(int x = 0; x < ary.length; x++){
-	    for(int y = 0; y < ary[0].length; y++){
-		ary[x][y] = x;
-	    }
-	}
-	Box[][] items = convert(ary);
-	String str = "";
-	for(int x = 0; x < items.length; x++){
-	    for(int y = 0; y < items[0].length; y++){
-		str = str + items[x][y] + "";
-	    }
-	}
-	System.out.println(str);
-
-	// Sudoku a = new Sudoku();
-	// String str = a.makeString();
+	// int[][] ary  = new int[9][9];	
+	// for(int x = 0; x < ary.length; x++){
+	//     for(int y = 0; y < ary[0].length; y++){
+	// 	ary[x][y] = x;
+	//     }
+	// }
+	// Box[][] items = convert(ary);
+	// String str = "";
+	// for(int x = 0; x < items.length; x++){
+	//     for(int y = 0; y < items[0].length; y++){
+	// 	str = str + items[x][y] + "";
+	//     }
+	// }
 	// System.out.println(str);
+
+	Sudoku a = new Sudoku();
+	String str = a.makeString();
+	System.out.println(str);
+	System.out.println(a.isValidRow(0,0));
 	
         // do{
 
@@ -85,6 +86,18 @@ public class Sudoku{
 	}
 	return a;
     }
+
+    private boolean isValidRow(int x, int y){
+	for(int col = 0; col < data[x].length; col++){
+	    if(col != y){
+		if (data[x][y].getValue() == data[x][col].getValue()){
+		    return false;
+		}
+	    }
+	}
+	return true;
+    }
+			
 }
 
-		    
+		  
