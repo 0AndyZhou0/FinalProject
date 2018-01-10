@@ -1,7 +1,6 @@
 public class Sudoku{
     
     public static void main(String[] args){
-<<<<<<< HEAD
 	int[][] ary  = new int[9][9];	
 	for(int x = 0; x < ary.length; x++){
 	    for(int y = 0; y < ary[0].length; y++){
@@ -18,25 +17,13 @@ public class Sudoku{
 	System.out.println(str);
 
 	// Sudoku a = new Sudoku();
-	// String str = a.makeString();
-	// System.out.println(str);
+	// a.display();
 	
         // do{
-
+	    
 	// } while{
 	    
 	// }
-=======
-	Sudoku a = new Sudoku();
-	a.display();
-	/*
-        do{
-	    
-	} while{
-	    
-	}
-	*/
->>>>>>> origin/Andy
     }
     
     private Box[][] data;    
@@ -88,7 +75,6 @@ public class Sudoku{
 	return data[row][col].getValue();
     }
 
-<<<<<<< HEAD
     private static  Box[][] convert(int[][] ary){
 	Box[][] a = new Box[ary.length][ary[0].length];
 	for(int x = 0; x < ary.length; x++){
@@ -97,7 +83,8 @@ public class Sudoku{
 	    }
 	}
 	return a;
-=======
+    }
+
     private boolean isSolved(){
 	for(int i = 0;i < 9;i++){
 	    int sum = 0;
@@ -118,7 +105,6 @@ public class Sudoku{
 	    }
 	}
 	return true;
->>>>>>> origin/Andy
     }
 }
 
