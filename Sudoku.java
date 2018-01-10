@@ -108,6 +108,9 @@ public class Sudoku{
 		if (data[x][y].getValue() == data[x][col].getValue()){
 		    return false;
 		}
+	    }
+	}
+    }
 
     private boolean isSolved(){
 	for(int i = 0;i < 9;i++){
