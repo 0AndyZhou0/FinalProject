@@ -32,6 +32,8 @@ public class Box{
     public void setValue(int num){
 	if(mutable = true){
 	    value = num;
+	}else{
+	    System.out.println("This square is not changable");
 	}
     }
     
@@ -45,9 +47,8 @@ public class Box{
     }
 
     /**
-     *Andy, you didn't commment this code, I don't understand what it is intended for.
-     *It seems to do the same thing as the setValue method.
-     *Could you explain it to me. Thanks, Edward.
+     *It will auto solves a box later.
+     *Could you explain it to me. Thanks, Mr. Edward.
      */
 
     public void hinted(int ans){
@@ -56,7 +57,9 @@ public class Box{
 	}
     }
 
-
+    public String toString(){
+	return getValue() + "";
+    }
 
     
 }
