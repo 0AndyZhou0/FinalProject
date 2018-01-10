@@ -8,12 +8,7 @@ public class Sudoku{
 	    }
 	}
 	Box[][] items = convert(ary);
-	String str = "";
-	for(int x = 0; x < items.length; x++){
-	    for(int y = 0; y < items[0].length; y++){
-		str = str + items[x][y] + "";
-	    }
-	}
+	String str = makeString(items);
 	System.out.println(str);
 
 	// Sudoku a = new Sudoku();
@@ -56,11 +51,11 @@ public class Sudoku{
 	}
     }
 
-    private String makeString(){
+    private static String makeString(Box[][] stuff){
     	String line = "";
-    	for(int i = 0;i < 9;i++){
-    	    for(int x = 0;x < 9;x++){
-    		line += data[i][x].getValue() + " ";
+    	for(int i = 0;i < stuff.length;i++){
+    	    for(int x = 0;x < stuff.length;x++){
+    		line += stuff[i][x] + " ";
     	    }
     	    line = line + "\n";
     	}
