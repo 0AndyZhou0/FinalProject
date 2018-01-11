@@ -1,7 +1,7 @@
+import java.util.*;
 public class Sudoku{
     
     public static void main(String[] args){
-	Console c = System.console();
 	int[][] stuff = {{2,4,8,3,9,5,7,1,6},
 			 {5,7,1,6,2,8,3,4,9},
 			 {9,3,6,7,4,1,5,8,2},
@@ -19,7 +19,7 @@ public class Sudoku{
 	a.display();
 	
 	do{
-	     
+	    a.readConsole();
 	} while{!a.isSolved()}
     }
     
@@ -51,6 +51,24 @@ public class Sudoku{
 	    }
 	}
     }
+
+    private void readConsole(){
+	Console input = System.console();
+	String command = console.readLine();
+
+	if(command = ""){
+	    System.outprintln(
+			      "1.set row column number\n
+Allows you to change modifiable boxes\n
+2.Solve \n
+Solves the entire puzzle\n
+"
+			      }
+	}
+    }
+
+
+    
     
     private void display(){
 	for(int i = 0;i < 9;i++){
