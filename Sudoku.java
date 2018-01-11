@@ -131,7 +131,7 @@ public class Sudoku{
 		return false;
 	    }
 	}
-	for(int i = 0;i < 3;i++){
+	for(int i = 0;i < 9;i+3){
 	    int sum = 0;
 	    for(int x = 0;x < 3;x++){
 		sum += data[i*3][x].getValue();
