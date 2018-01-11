@@ -20,7 +20,7 @@ public class Sudoku{
 	
 	do{
 	    a.readConsole();
-	} while{!a.isSolved()}
+	} while(!a.isSolved());
     }
     
     private Box[][] data;    
@@ -56,14 +56,8 @@ public class Sudoku{
 	Console input = System.console();
 	String command = console.readLine();
 
-	if(command = ""){
-	    System.outprintln(
-			      "1.set row column number\n
-Allows you to change modifiable boxes\n
-2.Solve \n
-Solves the entire puzzle\n
-"
-			      }
+	if(command == ""){
+	    System.outprintln("1.set row column number\nAllows you to change modifiable boxes\n2.Solve\nSolves the entire puzzle\n");
 	}
     }
 
