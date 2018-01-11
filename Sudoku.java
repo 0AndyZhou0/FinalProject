@@ -1,35 +1,18 @@
 public class Sudoku{
     
     public static void main(String[] args){
-
-	// int[][] ary  = new int[9][9];	
-	// for(int x = 0; x < ary.length; x++){
-	//     for(int y = 0; y < ary[0].length; y++){
-	// 	ary[x][y] = x;
-	//     }
-	// }
-	// Box[][] items = convert(ary);
-	// String str = "";
-	// for(int x = 0; x < items.length; x++){
-	//     for(int y = 0; y < items[0].length; y++){
-	// 	str = str + items[x][y] + "";
-	//     }
-	// }
-	// System.out.println(str);
-
-	Sudoku a = new Sudoku();
-        a.display();
-	a.set(0,4,0);
-	System.out.println(a.isValidRow(0,0));
-	
-	int[][] ary  = new int[9][9];	
-	for(int x = 0; x < ary.length; x++){
-	    for(int y = 0; y < ary[0].length; y++){
-		ary[x][y] = x;
-	    }
-	}
-	Box[][] items = convert(ary);
-        a.display();
+	int[][] stuff = {{2,4,8,3,9,5,7,1,6},
+			 {5,7,1,6,2,8,3,4,9},
+			 {9,3,6,7,4,1,5,8,2},
+			 {6,8,2,5,3,9,1,7,4},
+			 {3,5,9,1,7,4,6,2,8},
+			 {7,1,4,8,6,2,9,5,3},
+			 {8,6,3,4,1,7,2,9,5},
+			 {1,9,5,2,8,6,4,3,7},
+			 {4,2,7,9,5,3,8,6,1}};
+	Sudoku a = new Sudoku(stuff);
+	a.display();
+	System.out.println(a.isSolved());
 
 	// Sudoku a = new Sudoku();
 	// a.display();
@@ -57,6 +40,15 @@ public class Sudoku{
 	for(int i = 0;i < 9;i++){
 	    for(int x = 0;x < 9;x++){
 		data[i][x] = new Box(a.get(i,x));
+	    }
+	}
+    }
+
+    public Sudoku(int[][] a){
+	data = new Box[9][9];
+	for(int i = 0;i < 9;i++){
+	    for(int x = 0;x < 9;x++){
+		data[i][x] = new Box(a[i][x]);
 	    }
 	}
     }
@@ -131,7 +123,7 @@ public class Sudoku{
 		return false;
 	    }
 	}
-	for(int i = 0;i < 9;i+3){
+	for(int i = 0;i < 3;i++){
 	    int sum = 0;
 	    for(int x = 0;x < 3;x++){
 		sum += data[i*3][x].getValue();
