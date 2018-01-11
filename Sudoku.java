@@ -1,6 +1,7 @@
 public class Sudoku{
     
     public static void main(String[] args){
+	Console c = System.console();
 	int[][] stuff = {{2,4,8,3,9,5,7,1,6},
 			 {5,7,1,6,2,8,3,4,9},
 			 {9,3,6,7,4,1,5,8,2},
@@ -14,14 +15,12 @@ public class Sudoku{
 	a.display();
 	System.out.println(a.isSolved());
 
-	// Sudoku a = new Sudoku();
-	// a.display();
+	Sudoku a = new Sudoku();
+	a.display();
 	
-        // do{
-	    
-	// } while{
-	    
-	// }
+	do{
+	     
+	} while{!a.isSolved()}
     }
     
     private Box[][] data;    
