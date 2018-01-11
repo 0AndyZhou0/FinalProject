@@ -129,11 +129,26 @@ public class Sudoku{
 	    }
 	    if(sum != 45){
 		return false;
-
+	    }
+	}
+	for(int i = 0;i < 3;i++){
+	    int sum = 0;
+	    for(int x = 0;x < 3;x++){
+		sum += data[i*3][x].getValue();
+	    }
+	    for(int x = 0;x < 3;x++){
+		sum += data[i*3+1][x].getValue();
+	    }
+	    for(int x = 0;x < 3;x++){
+		sum += data[i*3+2][x].getValue();
+	    }
+	    if(sum != 45){
+		return false;
 	    }
 	}
 	return true;
     }
+
 
 }
 
