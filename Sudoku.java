@@ -18,9 +18,12 @@ public class Sudoku{
 	do{
 	    String in = input.nextLine();
 	    if(in.substring(0,3).equals("set")){
-		//in.substring(4,5)
-		System.out.println("You Suck");
+		int row = Integer.parseInt(in.substring(4,5));
+		int col = Integer.parseInt(in.substring(6,7));
+		int num = Integer.parseInt(in.substring(8,9));
+		a.set(row,col,num);
 	    }
+	    a.display();
 	} while(!a.isSolved());
     }
     
