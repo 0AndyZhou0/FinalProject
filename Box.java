@@ -21,8 +21,13 @@ public class Box{
 	if(num < 0 || num > 9){
 	    throw new IndexOutOfBoundsException("You put in an unsupported value, this command takes integers 0 - 9");
 	}
-	value = num;
-	mutable = false;
+	if(num == 0){
+	    value = 0;
+	    mutable = true;
+	}else{
+	    value = num;
+	    mutable = false;
+	}
     }
     
     /**
@@ -30,11 +35,7 @@ public class Box{
      */
 
     public void setValue(int num){
-	if(mutable = true){
-	    value = num;
-	}else{
-	    System.out.println("This square is not changable");
-	}
+	value = num;
     }
     
     /**
@@ -61,5 +62,7 @@ public class Box{
 	return getValue() + "";
     }
 
-    
+    public boolean isMutable(){
+	return mutable;
+    }
 }

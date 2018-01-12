@@ -13,7 +13,6 @@ public class Sudoku{
 			 {1,9,5,2,8,6,4,3,7},
 			 {4,2,7,9,5,3,8,6,1}};
 	Sudoku a = new Sudoku(stuff);
-        a.data[8][8] = new Box();
 	a.display();
 	do{
 	    String in = input.nextLine();
@@ -37,7 +36,6 @@ public class Sudoku{
 		data[i][x] = new Box(x);
 	    }
 	}
-	moved = false;
     }
 
     public Sudoku(Sudoku a){
@@ -47,7 +45,6 @@ public class Sudoku{
 		data[i][x] = new Box(a.get(i,x));
 	    }
 	}
-	moved = false;
     }
 
     public Sudoku(int[][] a){
@@ -57,7 +54,6 @@ public class Sudoku{
 		data[i][x] = new Box(a[i][x]);
 	    }
 	}
-	moved = false;
     }
 
     
@@ -83,7 +79,9 @@ public class Sudoku{
     }
 
     private void set(int row,int col,int num){
-	data[row][col].setValue(num);
+	if(data[row][col].isMutable()){
+	    data[row][col].setValue(num);
+	}
     }
 
     private int get(int row,int col){
