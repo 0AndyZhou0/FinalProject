@@ -105,9 +105,20 @@ public class Sudoku{
 
 
     private boolean isValidRow(int x, int y){
-	for(int col = 0;col < 9;col++){
+	for(int col = 0; col < 9; col++){
 	    if(col != y){
 		if (data[x][y].getValue() == data[x][col].getValue()){
+		    return false;
+		}
+	    }
+	}
+	return true;
+    }
+
+     private boolean isValidCol(int x, int y){
+	for(int row = 0; row < 9; row++){
+	    if(row != x){
+		if (data[x][y].getValue() == data[row][y].getValue()){
 		    return false;
 		}
 	    }
