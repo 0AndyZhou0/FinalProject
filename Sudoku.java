@@ -13,10 +13,14 @@ public class Sudoku{
 			 {1,9,5,2,8,6,4,3,7},
 			 {4,2,7,9,5,3,8,6,1}};
 	Sudoku a = new Sudoku(stuff);
+        a.data[8][8] = new Box();
 	a.display();
 	do{
 	    String in = input.nextLine();
-	    
+	    if(in.substring(0,3).equals("set")){
+		//in.substring(4,5)
+		System.out.println("You Suck");
+	    }
 	} while(!a.isSolved());
     }
     
