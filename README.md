@@ -1,5 +1,9 @@
 # FinalProject
-For APCS final project
+APCS final project
 Sudoku
-Class Board includes many Class Box(s)
 
+1.set row column number
+Allows you to change modifiable boxes
+
+2.Solve
+Solves the entire puzzle

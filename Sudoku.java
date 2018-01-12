@@ -2,6 +2,7 @@ import java.util.*;
 public class Sudoku{
     
     public static void main(String[] args){
+	Scanner s = new Scanner(System.in);
 	int[][] stuff = {{2,4,8,3,9,5,7,1,6},
 			 {5,7,1,6,2,8,3,4,9},
 			 {9,3,6,7,4,1,5,8,2},
@@ -52,7 +53,7 @@ public class Sudoku{
     }
 
     private void readConsole(){
-	Scanner s = new Scanner(System,
+	
 	String command = console.readLine();
 
 	if(command == ""){
