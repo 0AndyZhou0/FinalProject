@@ -13,17 +13,13 @@ public class Sudoku{
 			 {4,2,7,9,5,3,8,6,1}};
 	Sudoku a = new Sudoku(stuff);
 	a.display();
-	System.out.println(a.isSolved());
-
-	Sudoku a = new Sudoku();
-	a.display();
-	
 	do{
 	    a.readConsole();
 	} while(!a.isSolved());
     }
     
-    private Box[][] data;    
+    private Box[][] data;
+    private boolean moved;
 
     public Sudoku(){
 	data = new Box[9][9];
@@ -32,6 +28,7 @@ public class Sudoku{
 		data[i][x] = new Box(x);
 	    }
 	}
+	moved = false;
     }
 
     public Sudoku(Sudoku a){
@@ -41,6 +38,7 @@ public class Sudoku{
 		data[i][x] = new Box(a.get(i,x));
 	    }
 	}
+	moved = false;
     }
 
     public Sudoku(int[][] a){
@@ -50,10 +48,11 @@ public class Sudoku{
 		data[i][x] = new Box(a[i][x]);
 	    }
 	}
+	moved = false;
     }
 
     private void readConsole(){
-	Console input = System.console();
+	Scanner s = new Scanner(System,
 	String command = console.readLine();
 
 	if(command == ""){
