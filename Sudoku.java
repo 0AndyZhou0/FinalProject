@@ -215,13 +215,9 @@ public class Sudoku{
 	for(int i = 0;i < 9;i++){
 	    int sum = 0;
 	    for(int x = 0;x < 3;x++){
-		sum += data[i/3*3][x].getValue();
-	    }
-	    for(int x = 0;x < 3;x++){
-		sum += data[i/3*3+1][x].getValue();
-	    }
-	    for(int x = 0;x < 3;x++){
-		sum += data[i/3*3+2][x].getValue();
+		for(int w = 0;w < 3;w++){
+		    sum += data[i/3*3+w][x].getValue();
+		}
 	    }
 	    if(sum != 45){
 		return false;
