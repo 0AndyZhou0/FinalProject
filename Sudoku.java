@@ -80,7 +80,7 @@ public class Sudoku{
 	}
     }
 
-
+    
 
 
 
@@ -140,7 +140,9 @@ public class Sudoku{
 	return a;
     }
 
-
+    /*
+      Checks if a box is valid in its given row
+    */
     private boolean isValidRow(int x, int y){
 	for(int col = 0;col < 9;col++){
 	    if(col != y){
@@ -152,6 +154,20 @@ public class Sudoku{
 	return true;
     }
 
+    /*
+      Checks if a box is valid in its given column
+    */
+    private boolean isValidCol(int x, int y){
+	for(int row = 0;row < 9;row++){
+	    if(row != x){
+		if (data[x][y].getValue() == data[row][y].getValue()){
+		    return false;
+		}
+	    }
+	}
+	return true;
+    }
+    
     /*
       Checks if the board is a valid solution
       Third part is not fully working
