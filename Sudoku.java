@@ -29,6 +29,9 @@ public class Sudoku{
     private Box[][] data;
     private boolean moved;
 
+    /*
+      Later creates a random Sudoku Board
+     */
     public Sudoku(){
 	data = new Box[9][9];
 	for(int i = 0;i < 9;i++){
@@ -38,6 +41,9 @@ public class Sudoku{
 	}
     }
 
+    /*
+      Creates a puzzle from an existing puzzle
+    */
     public Sudoku(Sudoku a){
 	data = new Box[9][9];
 	for(int i = 0;i < 9;i++){
@@ -47,6 +53,9 @@ public class Sudoku{
 	}
     }
 
+    /*
+      Creates a puzzle from an existing array of ints
+    */
     public Sudoku(int[][] a){
 	data = new Box[9][9];
 	for(int i = 0;i < 9;i++){
@@ -56,7 +65,24 @@ public class Sudoku{
 	}
     }
 
+
+
     
+
+
+
+
+
+
+
+
+
+
+
+    
+    /*
+      prints the puzzle in an elementary fashion
+    */
     private void display(){
 	for(int i = 0;i < 9;i++){
 	    String line = "";
@@ -78,12 +104,18 @@ public class Sudoku{
 	return line;
     }
 
+    /*
+      sets the box at the row and column to the number you want
+    */
     private void set(int row,int col,int num){
 	if(data[row][col].isMutable()){
 	    data[row][col].setValue(num);
 	}
     }
 
+    /*
+      returns the value at the given coordinates
+    */
     private int get(int row,int col){
 	return data[row][col].getValue();
     }
@@ -110,6 +142,10 @@ public class Sudoku{
 	return true;
     }
 
+    /*
+      Checks if the board is a valid solution
+      Third part is not fully working
+     */
     private boolean isSolved(){
 	for(int i = 0;i < 9;i++){
 	    int sum = 0;
@@ -147,7 +183,7 @@ public class Sudoku{
 	return true;
     }
 
-
+    
 }
 
 		  
