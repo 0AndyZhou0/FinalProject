@@ -23,8 +23,8 @@ public class Sudoku{
 			  {8,9,1,2,3,4,5,6,7},
 			  {9,1,2,3,4,5,6,7,8}};
 	Sudoku b = new Sudoku(thing);
-	System.out.println(a.isSolved());
-	System.out.println(b.isSolved());
+	System.out.println(a.isValidBox(0,1));
+	System.out.println(b.isValidBox(0,1));
 	a.display();
 	do{
 	    String in = input.nextLine();
@@ -153,7 +153,7 @@ public class Sudoku{
     }
 
     /*
-      Checks if a box is valid in its given row
+      Checks if an individual box is valid in its given row
     */
     private boolean isValidRow(int x, int y){
 	for(int col = 0;col < 9;col++){
@@ -167,7 +167,7 @@ public class Sudoku{
     }
 
     /*
-      Checks if a box is valid in its given column
+      Checks if an individual box is valid in its given column
     */
     private boolean isValidCol(int x, int y){
 	for(int row = 0;row < 9;row++){
@@ -181,11 +181,20 @@ public class Sudoku{
     }
 
     /*
-      Checks if a box is valid in its given 3x3 box
+      Checks if an individual box is valid in its given 3x3 box
     */
     private boolean isValidBox(int x, int y){
-	int boxXCor = x / 3 * 3;
-	int boxYCor = y / 3 * 3;
+	int boxX = x / 3 * 3;
+	int boxY = y / 3 * 3;
+	for(int row = 0;row < 3;row++){
+	    for(int col = 0;col < 3;col++){
+		if(row != x && col != y){
+		    if(data[boxX+row][boxY+col].getValue() == data[x][y].getValue()){
+			return false;
+		    }
+		}
+	    }
+	}
 	return true;
     }
     
