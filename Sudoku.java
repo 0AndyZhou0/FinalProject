@@ -82,17 +82,26 @@ public class Sudoku{
 	if(isSolved()){
 	    solution = data;
 	}else{
-	    for(int i = 0;i < 9;i++){
-		for(int x = 0;x < 9;x++){
-		    if(data[i][x].isMutable()){
-			//Check next solutions
+	    for(int x = 0;x < 9;x++){
+		for(int y = 0;y < 9;y++){
+		    if(data[x][y].isMutable()){
+			SolveBox(x,y);
 		    }
 		}
 	    }
 	}
     }
 
-    
+    private boolean SolveBox(x,y){
+	for(int value = 1;value < 10;value++){
+	    set(x,y,value);
+	    if(isValid(x,y)){
+		if(isSolved()){
+		    return true;
+		}
+	    }
+	}
+    }
 
 
 
@@ -126,6 +135,15 @@ public class Sudoku{
 	return line;
     }
 
+    private void dataToSol(){
+        solution = new Box[9][9];
+	for(int i = 0;i < 9;i++){
+	    for(int x = 0;x < 9;x++){
+		solution[i][x] = new Box(get(i,x));
+	    }
+	}
+    }
+    
     /*
       sets the box at the row and column to the number you want
     */
@@ -136,20 +154,19 @@ public class Sudoku{
     }
 
     /*
+      set in the solution
+    */
+    private void setSol(int row,int col,int num){
+	if(solution[row][col].isMutable()){
+	    solution[row][col].setValue(num);
+	}
+    }
+
+    /*
       returns the value at the given coordinates
     */
     private int get(int row,int col){
 	return data[row][col].getValue();
-    }
-
-    private static  Box[][] convert(int[][] ary){
-	Box[][] a = new Box[ary.length][ary[0].length];
-	for(int x = 0; x < ary.length; x++){
-	    for(int y = 0; y < ary[0].length; y++){
-		a[x][y] = new Box(ary[x][y]);
-	    }
-	}
-	return a;
     }
 
     /*
@@ -196,6 +213,13 @@ public class Sudoku{
 	    }
 	}
 	return true;
+    }
+
+    /*
+      Checks if box is valid in its current position
+     */
+    private boolean isValid(int x,int y){
+	return isValidRow(x,y) && isValidCol(x,y) && isValidBox(x,y);
     }
     
     /*
