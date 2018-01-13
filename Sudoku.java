@@ -3,7 +3,7 @@ public class Sudoku{
     
     public static void main(String[] args){
 	Scanner input = new Scanner(System.in);
-	int[][] stuff = {{0,4,8,3,9,5,7,1,6},
+	int[][] stuff = {{2,4,8,3,9,5,7,1,6},
 			 {5,7,1,6,2,8,3,4,9},
 			 {9,3,6,7,4,1,5,8,2},
 			 {6,8,2,5,3,9,1,7,4},
@@ -11,8 +11,20 @@ public class Sudoku{
 			 {7,1,4,8,6,2,9,5,3},
 			 {8,6,3,4,1,7,2,9,5},
 			 {1,9,5,2,8,6,4,3,7},
-			 {4,2,7,9,5,3,8,6,0}};
+			 {4,2,7,9,5,3,8,6,1}};
 	Sudoku a = new Sudoku(stuff);
+	int[][] thing  = {{1,2,3,4,5,6,7,8,9},
+			  {2,3,4,5,6,7,8,9,1},
+			  {3,4,5,6,7,8,9,1,2},
+			  {4,5,6,7,8,9,1,2,3},
+			  {5,6,7,8,9,1,2,3,4},
+			  {6,7,8,9,1,2,3,4,5},
+			  {7,8,9,1,2,3,4,5,6},
+			  {8,9,1,2,3,4,5,6,7},
+			  {9,1,2,3,4,5,6,7,8}};
+	Sudoku b = new Sudoku(thing);
+	System.out.println(a.isSolved());
+	System.out.println(b.isSolved());
 	a.display();
 	do{
 	    String in = input.nextLine();
@@ -66,8 +78,8 @@ public class Sudoku{
 	}
     }
 
-    private Solve(){
-	if(isSolved){
+    private void Solve(){
+	if(isSolved()){
 	    solution = data;
 	}else{
 	    for(int i = 0;i < 9;i++){
@@ -167,6 +179,15 @@ public class Sudoku{
 	}
 	return true;
     }
+
+    /*
+      Checks if a box is valid in its given 3x3 box
+    */
+    private boolean isValidBox(int x, int y){
+	int boxXCor = x / 3 * 3;
+	int boxYCor = y / 3 * 3;
+	return true;
+    }
     
     /*
       Checks if the board is a valid solution
@@ -191,16 +212,16 @@ public class Sudoku{
 		return false;
 	    }
 	}
-	for(int i = 0;i < 3;i++){
+	for(int i = 0;i < 9;i++){
 	    int sum = 0;
 	    for(int x = 0;x < 3;x++){
-		sum += data[i*3][x].getValue();
+		sum += data[i/3*3][x].getValue();
 	    }
 	    for(int x = 0;x < 3;x++){
-		sum += data[i*3+1][x].getValue();
+		sum += data[i/3*3+1][x].getValue();
 	    }
 	    for(int x = 0;x < 3;x++){
-		sum += data[i*3+2][x].getValue();
+		sum += data[i/3*3+2][x].getValue();
 	    }
 	    if(sum != 45){
 		return false;
