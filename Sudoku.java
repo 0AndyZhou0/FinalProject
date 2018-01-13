@@ -3,7 +3,7 @@ public class Sudoku{
     
     public static void main(String[] args){
 	Scanner input = new Scanner(System.in);
-	int[][] stuff = {{2,4,8,3,9,5,7,1,6},
+	int[][] stuff = {{0,4,8,3,9,5,7,1,6},
 			 {5,7,1,6,2,8,3,4,9},
 			 {9,3,6,7,4,1,5,8,2},
 			 {6,8,2,5,3,9,1,7,4},
@@ -11,7 +11,7 @@ public class Sudoku{
 			 {7,1,4,8,6,2,9,5,3},
 			 {8,6,3,4,1,7,2,9,5},
 			 {1,9,5,2,8,6,4,3,7},
-			 {4,2,7,9,5,3,8,6,1}};
+			 {4,2,7,9,5,3,8,6,0}};
 	Sudoku a = new Sudoku(stuff);
 	a.display();
 	do{
@@ -26,7 +26,8 @@ public class Sudoku{
 	} while(!a.isSolved());
     }
     
-    private Box[][] data;
+    private Box[][] data,solution;
+    private int[][] numVariety;
     private boolean moved;
 
     /*
@@ -65,10 +66,19 @@ public class Sudoku{
 	}
     }
 
-
-
-    
-
+    private Solve(){
+	if(isSolved){
+	    solution = data;
+	}else{
+	    for(int i = 0;i < 9;i++){
+		for(int x = 0;x < 9;x++){
+		    if(data[i][x].isMutable()){
+			//Check next solutions
+		    }
+		}
+	    }
+	}
+    }
 
 
 
