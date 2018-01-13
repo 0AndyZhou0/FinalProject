@@ -2,6 +2,7 @@ import java.util.*;
 public class Sudoku{
     
     public static void main(String[] args){
+	Scanner input = new Scanner(System.in);
 	int[][] stuff = {{2,4,8,3,9,5,7,1,6},
 			 {5,7,1,6,2,8,3,4,9},
 			 {9,3,6,7,4,1,5,8,2},
@@ -13,17 +14,20 @@ public class Sudoku{
 			 {4,2,7,9,5,3,8,6,1}};
 	Sudoku a = new Sudoku(stuff);
 	a.display();
-	System.out.println(a.isSolved());
-
-	Sudoku a = new Sudoku();
-	a.display();
-	
 	do{
-	    a.readConsole();
+	    String in = input.nextLine();
+	    if(in.substring(0,3).equals("set")){
+		int row = Integer.parseInt(in.substring(4,5));
+		int col = Integer.parseInt(in.substring(6,7));
+		int num = Integer.parseInt(in.substring(8,9));
+		a.set(row,col,num);
+	    }
+	    a.display();
 	} while(!a.isSolved());
     }
     
-    private Box[][] data;    
+    private Box[][] data;
+    private boolean moved;
 
     public Sudoku(){
 	data = new Box[9][9];
@@ -52,17 +56,6 @@ public class Sudoku{
 	}
     }
 
-    private void readConsole(){
-	Console input = System.console();
-	String command = console.readLine();
-
-	if(command == ""){
-	    System.outprintln("1.set row column number\nAllows you to change modifiable boxes\n2.Solve\nSolves the entire puzzle\n");
-	}
-    }
-
-
-    
     
     private void display(){
 	for(int i = 0;i < 9;i++){
@@ -86,7 +79,9 @@ public class Sudoku{
     }
 
     private void set(int row,int col,int num){
-	data[row][col].setValue(num);
+	if(data[row][col].isMutable()){
+	    data[row][col].setValue(num);
+	}
     }
 
     private int get(int row,int col){
