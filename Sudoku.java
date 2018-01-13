@@ -82,6 +82,9 @@ public class Sudoku{
 	if(data[row][col].isMutable()){
 	    data[row][col].setValue(num);
 	}
+	else{
+	    System.out.println("You attempted to change the value of an immutable number");
+	}
     }
 
     private int get(int row,int col){
