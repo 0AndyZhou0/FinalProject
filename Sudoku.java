@@ -35,7 +35,7 @@ public class Sudoku{
 			  {9,1,2,3,4,5,6,7,8}};
 	Sudoku b = new Sudoku(thing);
 	*/
-	a.solve();
+	System.out.println(a.solve());
 	a.display();
 	do{
 	    String in = input.nextLine();
@@ -93,29 +93,26 @@ public class Sudoku{
     }
 
     private boolean solve(){
-	int currentX = 0;
-	int currentY = 0;
+	int row = 0;
+	int col = 0;
 	if(isSolved()){
-	    solution = data;
 	    return true;
-	}else{
-	    for(int x = 0;x < 9;x++){
-		for(int y = 0;y < 9;y++){
-		    if(get(x,y) == 0){
-			currentX = x;
-			currentY = y;
-		    }
+	}
+	for(int x = 0;x < 9;x++){
+	    for(int y = 0;y < 9;y++){
+		if(get(x,y) == 0){
+		    row = x;
+		    col = y;
+		    x = 9;
+		    y = 9;			
 		}
 	    }
-	    for(int value = 0;value < 9;value++){
-		if(isValid(currentX,currentY,value)){
-		    set(currentX,currentY,value);
-		    if(solve()){
-			return true;
-		    }else{
-			set(currentX,currentY,0);
-		    }
-		}
+	}
+	for(int value = 0;value < 9;value++){
+	    if(isValid(row,col,value)){
+		set(row,col,value);
+	        display();
+	        return solve();
 	    }
 	}
 	return false;
@@ -193,12 +190,12 @@ public class Sudoku{
     private boolean isValidRowCol(int x, int y){
 	for(int num = 0;num < 9;num++){
 	    if(num != y){
-		if (data[x][y].getValue() == data[x][num].getValue()){
+		if (get(x,y) == get(x,num)){
 		    return false;
 		}
 	    }
 	    if(num != x){
-		if (data[x][y].getValue() == data[num][y].getValue()){
+		if (get(x,y) == get(num,y)){
 		    return false;
 		}
 	    }
@@ -216,7 +213,7 @@ public class Sudoku{
 	for(int row = boxX;row < boxX+3;row++){
 	    for(int col = boxY;col < boxY+3;col++){
 		if(row != x && col != y){
-		    if(data[row][col].getValue() == data[x][y].getValue()){
+		    if(get(row,col) == get(x,y)){
 			return false;
 		    }
 		}
@@ -245,14 +242,14 @@ public class Sudoku{
 	for(int i = 0;i < 9;i++){
  	    int sum = 0;
  	    for (int x = 0;x < 9;x++){
- 		sum += data[i][x].getValue();
+ 		sum += get(i,x);
  	    }
  	    if(sum != 45){
  		return false;
  	    }
 	    sum = 0;
  	    for (int x = 0;x < 9;x++){
- 		sum += data[x][i].getValue();
+ 		sum += get(x,i);
  	    }
  	    if(sum != 45){
  		return false;
@@ -260,7 +257,7 @@ public class Sudoku{
 	    sum = 0;
 	    for(int x = 0;x < 3;x++){
 		for(int w = 0;w < 3;w++){
-		    sum += data[i/3*3+w][x].getValue();
+		    sum += get(i/3*3+w,x);
 		}
 	    }
 	    if(sum != 45){
