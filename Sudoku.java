@@ -23,7 +23,6 @@ public class Sudoku{
 			 {0,9,0,2,0,6,0,0,7},
 			 {4,0,0,0,0,3,0,6,1}};
 	Sudoku a = new Sudoku(stuff);
-	System.out.println(a.isValid(3,3));
 	/*
 	  int[][] thing  = {{1,2,3,4,5,6,7,8,9},
 			  {2,3,4,5,6,7,8,9,1},
@@ -92,26 +91,16 @@ public class Sudoku{
 	}
     }
 
-    private void Solve(){
+    private boolean solve(){
 	if(isSolved()){
 	    solution = data;
 	}else{
 	    for(int x = 0;x < 9;x++){
 		for(int y = 0;y < 9;y++){
-		    if(data[x][y].isMutable()){
-			SolveBox(x,y);
+		    for(int value = 0;value < 9;value++){
+			boolean boxValid = true;
+			
 		    }
-		}
-	    }
-	}
-    }
-
-    private boolean SolveBox(int x,int y){
-	for(int value = 1;value < 10;value++){
-	    set(x,y,value);
-	    if(isValid(x,y)){
-		if(isSolved()){
-		    return true;
 		}
 	    }
 	}
@@ -203,20 +192,6 @@ public class Sudoku{
 	return true;
     }
 
-
-
-    private boolean isValidRow(int x, int y){
-	for(int col = 0; col < 9; col++){
-	    if(col != y){
-		if (data[x][y].getValue() == data[x][col].getValue()){
-		    return false;
-		}
-	    }
-	}
-	return true;
-    }
-
-
     /*
       Checks if an individual box is valid in its given 3x3 box
     */
@@ -236,24 +211,15 @@ public class Sudoku{
 	return true;
     }
 
-
-     private boolean isValidCol(int x, int y){
-	for(int row = 0; row < 9; row++){
-	    if(row != x){
-		if (data[x][y].getValue() == data[row][y].getValue()){
-		    return false;
-		}
-	    }
-	}
-	return true;
-    }
-
-
     /*
-      Checks if box is valid in its current position
+      Checks if box would be valid in a position
      */
-    private boolean isValid(int x,int y){
-	return isValidRowCol(x,y) && isValidBox(x,y);
+    private boolean isValid(int x,int y,int value){
+	boolean isValid = true;
+	data[x][y].setValue(value);
+	isValid = isValidRowCol(x,y) && isValidBox(x,y);
+	data[x][y].setValue(0);
+	return isValid;
     }
     
     /*
@@ -265,7 +231,7 @@ public class Sudoku{
 	boolean solved = true;
 	for(int x = 0;x < 9;x++){
 	    for(int y = 0;y < 9;y++){
-		solved = solved && isValid(x,y);
+		solved = solved && isValidRowCol(x,y) && isValidBox(x,y);
 	    }
 	}
 	return solved;
