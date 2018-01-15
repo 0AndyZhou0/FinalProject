@@ -35,7 +35,6 @@ public class Sudoku{
 			  {9,1,2,3,4,5,6,7,8}};
 	Sudoku b = new Sudoku(thing);
 	*/
-	System.out.println(a.solve());
 	a.display();
 	do{
 	    String in = input.nextLine();
@@ -45,10 +44,13 @@ public class Sudoku{
 		int num = Integer.parseInt(in.substring(8,9));
 		a.set(row,col,num);
 	    }
+	    if(in.substring(0,5).equals("solve")){
+	        a.solve();
+	    }
 	    a.display();
 	} while(!a.isSolved());
     }
-    
+
     private Box[][] data,solution;
     private int[][] numVariety;
     private boolean moved;
@@ -94,25 +96,26 @@ public class Sudoku{
 
     private boolean solve(){
 	int row = 0;
-	int col = 0;
-	if(isSolved()){
-	    return true;
-	}
+	int col = 9;
 	for(int x = 0;x < 9;x++){
 	    for(int y = 0;y < 9;y++){
 		if(get(x,y) == 0){
 		    row = x;
 		    col = y;
 		    x = 9;
-		    y = 9;			
+		    y = 9;
 		}
 	    }
 	}
-	for(int value = 0;value < 9;value++){
+	if(col == 9){
+	    return true;
+	}
+	for(int value = 1;value < 10;value++){
 	    if(isValid(row,col,value)){
 		set(row,col,value);
-	        display();
-	        return solve();
+		if(solve()){
+		    return true;
+		}
 	    }
 	}
 	return false;
