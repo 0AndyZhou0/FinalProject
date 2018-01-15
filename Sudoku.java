@@ -45,6 +45,7 @@ public class Sudoku{
 		a.set(row,col,num);
 	    }
 	    if(in.substring(0,5).equals("solve")){
+		a.reset();
 	        a.solve();
 	    }
 	    if(in.substring(0,5).equals("reset")){
