@@ -48,8 +48,7 @@ public class Box{
     }
 
     /**
-     *It will auto solves a box later.
-     *Could you explain it to me. Thanks, Mr. Edward.
+     *It will auto solve a box later.
      */
 
     public void hinted(int ans){
@@ -57,10 +56,18 @@ public class Box{
 	    value = ans;
 	}
     }
+    
+    /*
+      a toString left in for testing box methods
+    */
 
     public String toString(){
 	return getValue() + "";
     }
+
+    /*
+      tells you if a box is mutable
+    */
 
     public boolean isMutable(){
 	return mutable;

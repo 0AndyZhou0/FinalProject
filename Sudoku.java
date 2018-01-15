@@ -94,6 +94,10 @@ public class Sudoku{
 	}
     }
 
+    /*
+      The recursive solve function
+    */
+
     private boolean solve(){
 	int row = 0;
 	int col = 9;
@@ -134,6 +138,9 @@ public class Sudoku{
 	    System.out.println(line);
 	}
     }
+    /*
+      a toString method left in for testing purposes
+    */
 
     private static String makeString(Box[][] stuff){
     	String line = "";
@@ -145,6 +152,10 @@ public class Sudoku{
     	}
 	return line;
     }
+
+    /*
+      intitializes solution by making it a copy of data
+    */
 
     private void dataToSol(){
         solution = new Box[9][9];
