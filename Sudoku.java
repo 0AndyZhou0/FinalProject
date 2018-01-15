@@ -92,15 +92,23 @@ public class Sudoku{
     }
 
     private boolean solve(){
+	int currentX = 0;
+	int currentY = 0;
 	if(isSolved()){
 	    solution = data;
 	}else{
 	    for(int x = 0;x < 9;x++){
 		for(int y = 0;y < 9;y++){
-		    for(int value = 0;value < 9;value++){
-			boolean boxValid = true;
-			
+		    if(data[x][y].getValue() == 0){
+			currentX = x;
+			currentY = y;
 		    }
+		}
+	    }
+	    for(int value = 0;value < 9;value++){
+		if(isValid(x,y,value)){
+		    set(x,y,value);
+		    solve();
 		}
 	    }
 	}
@@ -216,9 +224,9 @@ public class Sudoku{
      */
     private boolean isValid(int x,int y,int value){
 	boolean isValid = true;
-	data[x][y].setValue(value);
+	set(x,y,value);
 	isValid = isValidRowCol(x,y) && isValidBox(x,y);
-	data[x][y].setValue(0);
+        set(x,y,0);
 	return isValid;
     }
     
