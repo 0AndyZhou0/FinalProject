@@ -193,12 +193,12 @@ public class Sudoku{
     private boolean isValidRowCol(int x, int y){
 	for(int num = 0;num < 9;num++){
 	    if(num != y){
-		if (data[x][y].getValue() == data[x][num].getValue()){
+		if (get(x,y) == get(x,num)){
 		    return false;
 		}
 	    }
 	    if(num != x){
-		if (data[x][y].getValue() == data[num][y].getValue()){
+		if (get(x,y) == get(num,y)){
 		    return false;
 		}
 	    }
@@ -216,7 +216,7 @@ public class Sudoku{
 	for(int row = boxX;row < boxX+3;row++){
 	    for(int col = boxY;col < boxY+3;col++){
 		if(row != x && col != y){
-		    if(data[row][col].getValue() == data[x][y].getValue()){
+		    if(get(row,col) == get(x,y)){
 			return false;
 		    }
 		}
