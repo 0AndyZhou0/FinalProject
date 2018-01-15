@@ -47,6 +47,9 @@ public class Sudoku{
 	    if(in.substring(0,5).equals("solve")){
 	        a.solve();
 	    }
+	    if(in.substring(0,5).equals("reset")){
+		a.reset();
+	    }
 	    a.display();
 	} while(!a.isSolved());
     }
@@ -286,6 +289,20 @@ public class Sudoku{
 	}
 	return solved;
     }
+
+    /*
+      convenient reset method
+    */
+
+    public void reset(){
+	for (int x = 0; x < 9; x++){
+	    for (int y = 0; y < 9; y++){
+		if (data[x][y].isMutable()){
+			set(x,y,0);
+		    }
+	    }
+	}
+    }		
 
 
 }
