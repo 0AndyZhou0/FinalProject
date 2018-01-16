@@ -65,10 +65,12 @@ public class Sudoku{
      */
     
     public Sudoku(){
-	data = new Box[9][9];
-	for(int i = 0;i < 9;i++){
-	    for(int x = 0;x < 9;x++){
-		data[i][x] = new Box(x);
+        for(int i = 0;i < 20;i++){
+	    int x = Math.random() * 9;
+	    int y = Math.random() * 9;
+	    int value = Math.random() * 9;
+	    if(isValid(x,y,value)){
+		set(x,y,value);
 	    }
 	}
     }
@@ -135,12 +137,13 @@ public class Sudoku{
     */
     
     private void display(){
+	System.out.println("  \033[4m1 2 3 4 5 6 7 8 9\033[0m");
 	for(int i = 0;i < 9;i++){
 	    String line = "";
 	    for(int x = 0;x < 9;x++){
-		line += data[i][x] + " ";
+		line += data[i][x] + "|";
 	    }
-	    System.out.println(line);
+	    System.out.println(i+1 + "|\033[4m" + line.substring(0,17) + "\033[0m|");
 	}
     }
     /*
