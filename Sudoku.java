@@ -39,14 +39,24 @@ public class Sudoku{
 	for(int x = 0;x < 9;x++){
 	    for(int y = 0;y < 9;y++){
 		data[x][y] = new Box();
+		data[x][y] = new Box();
 	    }
 	}
-        for(int i = 0;i < 17;i++){
+        for(int i = 0;i < 30;i++){
 	    int x = rand.nextInt(9);
 	    int y = rand.nextInt(9);
 	    int value = rand.nextInt(9) + 1;
 	    if(isValid(x,y,value)){
 	        data[x][y] = new Box(value);
+		if(solve()){
+		    for(int row = 0;row < 9;row++){
+			for(int col = 0;col < 9;col++){
+			    set(row,col,0);
+			}
+		    }
+		}else{
+		    data[x][y] = new Box();
+		}
 	    }
 	}
     }
@@ -113,7 +123,7 @@ public class Sudoku{
     */
     
     private void display(){
-	System.out.println("  \033[4m1 2 3 4 5 6 7 8 9\033[0m");
+	System.out.println("  \033[4m0 1 2 3 4 5 6 7 8\033[0m");
 	for(int x = 0;x < 9;x++){
 	    String line = "";
 	    for(int y = 0;y < 9;y++){
@@ -126,7 +136,7 @@ public class Sudoku{
 	    if(x % 3 == 0){
 		line = line;
 	    }
-	    System.out.println(x+1 + "|\033[4m" + line.substring(0,17) + "\033[0m|");
+	    System.out.println(x + "|\033[4m" + line.substring(0,17) + "\033[0m|");
 	}
     }
     /*
@@ -166,7 +176,7 @@ public class Sudoku{
 	    data[row][col].setValue(num);
 	}
 	else{
-	    System.out.println("You attempted to change the value of an immutable number");
+	    //System.out.println("You attempted to change the value of an immutable number");
 	}
     }
 
