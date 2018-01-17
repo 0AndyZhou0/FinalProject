@@ -3,39 +3,7 @@ public class Sudoku{
     
     public static void main(String[] args){
 	Scanner input = new Scanner(System.in);
-	/*int[][] stuff = {{2,4,8,3,9,5,7,1,6},
-			 {5,7,1,6,2,8,3,4,9},
-			 {9,3,6,7,4,1,5,8,2},
-			 {6,8,2,5,3,9,1,7,4},
-			 {3,5,9,1,7,4,6,2,8},
-			 {7,1,4,8,6,2,9,5,3},
-			 {8,6,3,4,1,7,2,9,5},
-			 {1,9,5,2,8,6,4,3,7},
-			 {4,2,7,9,5,3,8,6,1}};
-	*/
-	/*int[][] stuff = {{0,0,0,3,9,0,0,1,0},
-			 {5,0,1,0,0,0,0,4,0},
-			 {9,0,0,7,0,0,5,0,0},
-			 {6,0,2,5,3,0,0,7,0},
-			 {0,0,0,0,7,0,0,0,8},
-			 {7,0,0,8,0,0,9,0,3},
-			 {8,0,3,0,1,0,0,9,0},
-			 {0,9,0,2,0,6,0,0,7},
-			 {4,0,0,0,0,3,0,6,1}};
-	*/
-	Sudoku a = new Sudoku(choose());
-	/*
-	  int[][] thing  = {{1,2,3,4,5,6,7,8,9},
-			  {2,3,4,5,6,7,8,9,1},
-			  {3,4,5,6,7,8,9,1,2},
-			  {4,5,6,7,8,9,1,2,3},
-			  {5,6,7,8,9,1,2,3,4},
-			  {6,7,8,9,1,2,3,4,5},
-			  {7,8,9,1,2,3,4,5,6},
-			  {8,9,1,2,3,4,5,6,7},
-			  {9,1,2,3,4,5,6,7,8}};
-	Sudoku b = new Sudoku(thing);
-	*/
+	Sudoku a = new Sudoku();
 	a.display();
 	do{
 	    String in = input.nextLine();
@@ -59,18 +27,26 @@ public class Sudoku{
     private Box[][] data,solution;
     private int[][] numVariety;
     private boolean moved;
+    private Random rand;
 
     /*
       Later creates a random Sudoku Board
      */
     
     public Sudoku(){
-        for(int i = 0;i < 20;i++){
-	    int x = Math.random() * 9;
-	    int y = Math.random() * 9;
-	    int value = Math.random() * 9;
+	rand = new Random();
+	data = new Box[9][9];
+	for(int x = 0;x < 9;x++){
+	    for(int y = 0;y < 9;y++){
+		data[x][y] = new Box();
+	    }
+	}
+        for(int i = 0;i < 17;i++){
+	    int x = rand.nextInt(9);
+	    int y = rand.nextInt(9);
+	    int value = rand.nextInt(9) + 1;
 	    if(isValid(x,y,value)){
-		set(x,y,value);
+	        data[x][y] = new Box(value);
 	    }
 	}
     }
@@ -138,12 +114,19 @@ public class Sudoku{
     
     private void display(){
 	System.out.println("  \033[4m1 2 3 4 5 6 7 8 9\033[0m");
-	for(int i = 0;i < 9;i++){
+	for(int x = 0;x < 9;x++){
 	    String line = "";
-	    for(int x = 0;x < 9;x++){
-		line += data[i][x] + "|";
+	    for(int y = 0;y < 9;y++){
+		if(get(x,y) == 0){
+		    line += " |";
+		}else{
+		line += data[x][y] + "|";
+		}
 	    }
-	    System.out.println(i+1 + "|\033[4m" + line.substring(0,17) + "\033[0m|");
+	    if(x % 3 == 0){
+		line = line;
+	    }
+	    System.out.println(x+1 + "|\033[4m" + line.substring(0,17) + "\033[0m|");
 	}
     }
     /*
