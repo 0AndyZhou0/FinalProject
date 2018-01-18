@@ -7,6 +7,9 @@ public class Sudoku{
 	a.display();
 	do{
 	    String in = input.nextLine();
+	    if(in.length() != 3 && in.length() != 5){
+		System.out.println("Please insert a valid command");
+	    }
 	    if(in.substring(0,3).equals("set")){
 		int row = Integer.parseInt(in.substring(4,5));
 		int col = Integer.parseInt(in.substring(6,7));
@@ -21,7 +24,7 @@ public class Sudoku{
 		a.reset();
 	    }
 	    a.display();
-	} while(!a.isSolved());
+	}while(!a.isSolved());
     }
 
     private Box[][] data,solution;
@@ -49,13 +52,10 @@ public class Sudoku{
 	    if(isValid(x,y,value)){
 	        data[x][y] = new Box(value);
 		if(solve()){
-		    for(int row = 0;row < 9;row++){
-			for(int col = 0;col < 9;col++){
-			    set(row,col,0);
-			}
-		    }
+		    reset();
 		}else{
 		    data[x][y] = new Box();
+		    reset();
 		}
 	    }
 	}
@@ -279,13 +279,14 @@ public class Sudoku{
 		return false;
 	    }
 	}
-	boolean solved = true;
 	for(int x = 0;x < 9;x++){
 	    for(int y = 0;y < 9;y++){
-		solved = solved && isValidRowCol(x,y) && isValidBox(x,y);
+		if(!isValidRowCol(x,y) || !isValidBox(x,y)){
+		    return false;
+		}
 	    }
 	}
-	return solved;
+	return true;
     }
 
     /*
@@ -295,9 +296,7 @@ public class Sudoku{
     public void reset(){
 	for (int x = 0; x < 9; x++){
 	    for (int y = 0; y < 9; y++){
-		if (data[x][y].isMutable()){
-			set(x,y,0);
-		    }
+		set(x,y,0);
 	    }
 	}
     }
