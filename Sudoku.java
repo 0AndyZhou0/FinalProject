@@ -7,7 +7,7 @@ public class Sudoku{
 	a.display();
 	do{
 	    String in = input.nextLine();
-	    if(in.length() != 3 && in.length() != 5){
+	    if(!(in.length() == 3 || in.length() == 5)){
 		System.out.println("Please insert a valid command");
 	    }
 	    if(in.substring(0,3).equals("set")){
@@ -42,22 +42,17 @@ public class Sudoku{
 	for(int x = 0;x < 9;x++){
 	    for(int y = 0;y < 9;y++){
 		data[x][y] = new Box();
-		data[x][y] = new Box();
 	    }
 	}
-        for(int i = 0;i < 30;i++){
+	for(int i = 0;i < 20;i++){
+	    addNum();
+	}
+	for(int i = 0;i < 5;i++){
+	    solve();
 	    int x = rand.nextInt(9);
 	    int y = rand.nextInt(9);
-	    int value = rand.nextInt(9) + 1;
-	    if(isValid(x,y,value)){
-	        data[x][y] = new Box(value);
-		if(solve()){
-		    reset();
-		}else{
-		    data[x][y] = new Box();
-		    reset();
-		}
-	    }
+	    data[x][y] = new Box(get(x,y));
+	    reset();
 	}
     }
 
@@ -90,7 +85,6 @@ public class Sudoku{
     /*
       The recursive solve function
     */
-
     private boolean solve(){
 	int row = 0;
 	int col = 9;
@@ -117,11 +111,29 @@ public class Sudoku{
 	}
 	return false;
     }
+
+    private boolean addNum(){
+	int x = rand.nextInt(9);
+	int y = rand.nextInt(9);
+	int value = rand.nextInt(9) + 1;
+	if(isValid(x,y,value)){
+	    data[x][y] = new Box(value);
+	    if(solve()){
+		reset();
+	    }else{
+		data[x][y] = new Box();
+		reset();
+		addNum();
+	    }
+	}else{
+	    addNum();
+	}
+	return true;
+    }
     
     /*
       prints the puzzle in an elementary fashion
     */
-    
     private void display(){
 	System.out.println("  \033[4m0 1 2 3 4 5 6 7 8\033[0m");
 	for(int x = 0;x < 9;x++){
