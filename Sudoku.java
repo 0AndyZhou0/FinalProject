@@ -44,7 +44,7 @@ public class Sudoku{
 		data[x][y] = new Box();
 	    }
 	}
-	for(int i = 0;i < 10;i++){
+	for(int i = 0;i < 20;i++){
 	    addNum();
 	}
 	for(int i = 0;i < 5;i++){
@@ -122,11 +122,10 @@ public class Sudoku{
 	    x = rand.nextInt(9);
 	    y = rand.nextInt(9);
 	}
-        int value = rand.nextInt(9) + 1;
-	data[x][y] = new Box(value);
-	while(!solve()){
+	int value = rand.nextInt(9) + 1;
+        data[x][y] = new Box(value);
+	while(!(isValid(x,y,value) && solve())){
 	    value = rand.nextInt(9) + 1;
-	    	System.out.println(value);
 	    data[x][y] = new Box(value);
 	}
 	reset();
