@@ -44,7 +44,7 @@ public class Sudoku{
 		data[x][y] = new Box();
 	    }
 	}
-	for(int i = 0;i < 20;i++){
+	for(int i = 0;i < 10;i++){
 	    addNum();
 	}
 	for(int i = 0;i < 5;i++){
@@ -112,22 +112,24 @@ public class Sudoku{
 	return false;
     }
 
+    /*
+      adds a valid number to the puzzle
+     */
     private boolean addNum(){
 	int x = rand.nextInt(9);
 	int y = rand.nextInt(9);
-	int value = rand.nextInt(9) + 1;
-	if(isValid(x,y,value)){
-	    data[x][y] = new Box(value);
-	    if(solve()){
-		reset();
-	    }else{
-		data[x][y] = new Box();
-		reset();
-		addNum();
-	    }
-	}else{
-	    addNum();
+	while(get(x,y) != 0){
+	    x = rand.nextInt(9);
+	    y = rand.nextInt(9);
 	}
+        int value = rand.nextInt(9) + 1;
+	data[x][y] = new Box(value);
+	while(!solve()){
+	    value = rand.nextInt(9) + 1;
+	    	System.out.println(value);
+	    data[x][y] = new Box(value);
+	}
+	reset();
 	return true;
     }
     
