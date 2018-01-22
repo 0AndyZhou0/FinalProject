@@ -3,7 +3,12 @@ public class Sudoku{
     
     public static void main(String[] args){
 	Scanner input = new Scanner(System.in);
-	Sudoku a = new Sudoku();
+        Sudoku a = new Sudoku();
+	try{
+	    int seed = Integer.parseInt(args[0]);
+	    a = new Sudoku(seed);
+	}catch(Exception e){
+	}
 	a.display();
 	do{
 	    String in = input.nextLine();
@@ -166,9 +171,7 @@ public class Sudoku{
 	if(isValid(x,y,value)){
 	    data[x][y] = new Box(value);
 	    if(solve()){
-		display();
 		reset();
-		display();
 		return true;
 	    }
 	}
