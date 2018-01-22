@@ -8,10 +8,7 @@ public class Sudoku{
 	do{
 	    String in = input.nextLine();
 	    int len = in.length();
-	    if(!(len == 3 || len == 5)){
-		System.out.println("Please insert a valid command");
-	    }
-	    if(len == 3 && in.substring(0,3).equals("set")){
+	    if(len == 9 && in.substring(0,3).equals("set")){
 		int row = Integer.parseInt(in.substring(4,5));
 		int col = Integer.parseInt(in.substring(6,7));
 		int num = Integer.parseInt(in.substring(8,9));
@@ -24,6 +21,11 @@ public class Sudoku{
 	    if(len == 5 && in.substring(0,5).equals("reset")){
 		a.reset();
 	    }
+	    if(len == 8 && in.substring(0,4).equals("hint")){
+		int row = Integer.parseInt(in.substring(5,6));
+		int col = Integer.parseInt(in.substring(7,8));
+	        a.setPerm(row,col,a.getSol(row,col));
+	    }
 	    a.display();
 	}while(!a.isSolved());
     }
@@ -34,7 +36,7 @@ public class Sudoku{
     private Random rand;
 
     /*
-      Later creates a random Sudoku Board
+      Creates a random Sudoku Board
      */
     
     public Sudoku(){
@@ -55,13 +57,42 @@ public class Sudoku{
 	    }
 	    addNum(x,y);
 	}
+	solve();
 	for(int i = 0;i < 20;i++){
-	    solve();
 	    int x = rand.nextInt(9);
 	    int y = rand.nextInt(9);
 	    data[x][y] = new Box(get(x,y));
-	    reset();
 	}
+	dataToSol();
+	reset();
+    }
+
+    public Sudoku(int seed){
+	rand = new Random(seed);
+	data = new Box[9][9];
+	for(int x = 0;x < 9;x++){
+	    for(int y = 0;y < 9;y++){
+		data[x][y] = new Box();
+	    }
+	}
+	data[0][0] = new Box(rand.nextInt(9)+1);
+	for(int i = 0;i < 10;i++){
+	    int x = rand.nextInt(9);
+	    int y = rand.nextInt(9);
+	    while(get(x,y) != 0){
+		x = rand.nextInt(9);
+	        y = rand.nextInt(9);
+	    }
+	    addNum(x,y);
+	}
+	solve();
+	for(int i = 0;i < 20;i++){
+	    int x = rand.nextInt(9);
+	    int y = rand.nextInt(9);
+	    data[x][y] = new Box(get(x,y));
+	}
+	dataToSol();
+	reset();
     }
 
     /*
@@ -93,9 +124,13 @@ public class Sudoku{
     /*
       The recursive solve function
     */
-    private boolean solve(){
+    private boolean solve(){	
+	if(isSolved()){
+	    return true;
+	}
 	int row = 0;
 	int col = 9;
+	// Finds next empty cell
 	for(int x = 0;x < 9;x++){
 	    for(int y = 0;y < 9;y++){
 		if(get(x,y) == 0){
@@ -106,14 +141,14 @@ public class Sudoku{
 		}
 	    }
 	}
-	if(isSolved()){
-	    return true;
-	}
+	// Finds every possiblity after that cell
 	for(int value = 1;value < 10;value++){
 	    if(isValid(row,col,value)){
 		set(row,col,value);
 		if(solve()){
 		    return true;
+		}else{
+		    set(row,col,0);
 		}
 	    }
 	}
@@ -124,12 +159,16 @@ public class Sudoku{
       adds a valid number to the puzzle
      */
     private boolean addNum(int x,int y){
-	data[x][y] = new Box();
+        if(get(x,y) != 0){
+	    return true;
+	}
 	int value = rand.nextInt(9) + 1;
 	if(isValid(x,y,value)){
 	    data[x][y] = new Box(value);
 	    if(solve()){
+		display();
 		reset();
+		display();
 		return true;
 	    }
 	}
@@ -201,14 +240,16 @@ public class Sudoku{
 	}
     }
 
+    private void setPerm(int row,int col,int num){
+	data[row][col] = new Box(num);
+    }
+    
     /*
-      set in the solution
+      get value in the solution
     */
     
-    private void setSol(int row,int col,int num){
-	if(solution[row][col].isMutable()){
-	    solution[row][col].setValue(num);
-	}
+    private int getSol(int row,int col){
+	return solution[row][col].getValue();
     }
 
     /*
