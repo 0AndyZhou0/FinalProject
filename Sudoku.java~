@@ -44,17 +44,17 @@ public class Sudoku{
 		data[x][y] = new Box();
 	    }
 	}
-	for(int i = 0;i < 20;i++){
+	data[0][0] = new Box(rand.nextInt(9)+1);
+	for(int i = 0;i < 10;i++){
 	    addNum();
 	}
-	/*
-	for(int i = 0;i < 5;i++){
+	for(int i = 0;i < 15;i++){
 	    solve();
 	    int x = rand.nextInt(9);
 	    int y = rand.nextInt(9);
 	    data[x][y] = new Box(get(x,y));
 	    reset();
-	    }*/
+	}
     }
 
     /*
@@ -119,13 +119,13 @@ public class Sudoku{
     private boolean addNum(){
 	int x = rand.nextInt(9);
 	int y = rand.nextInt(9);
-	int value = 0;
 	while(get(x,y) != 0){
 	    x = rand.nextInt(9);
 	    y = rand.nextInt(9);
 	}
-	while(!solve()){
-	    reset();
+	int value = rand.nextInt(9) + 1;
+        data[x][y] = new Box(value);
+	while(!(isValid(x,y,value) && solve())){
 	    value = rand.nextInt(9) + 1;
 	    data[x][y] = new Box(value);
 	}

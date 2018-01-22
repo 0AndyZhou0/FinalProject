@@ -7,20 +7,21 @@ public class Sudoku{
 	a.display();
 	do{
 	    String in = input.nextLine();
-	    if(!(in.length() == 3 || in.length() == 5)){
+	    int len = in.length();
+	    if(!(len == 3 || len == 5)){
 		System.out.println("Please insert a valid command");
 	    }
-	    if(in.substring(0,3).equals("set")){
+	    if(len == 3 && in.substring(0,3).equals("set")){
 		int row = Integer.parseInt(in.substring(4,5));
 		int col = Integer.parseInt(in.substring(6,7));
 		int num = Integer.parseInt(in.substring(8,9));
 		a.set(row,col,num);
 	    }
-	    if(in.substring(0,5).equals("solve")){
+	    if(len == 5 && in.substring(0,5).equals("solve")){
 		a.reset();
 	        a.solve();
 	    }
-	    if(in.substring(0,5).equals("reset")){
+	    if(len == 5 && in.substring(0,5).equals("reset")){
 		a.reset();
 	    }
 	    a.display();
@@ -44,10 +45,17 @@ public class Sudoku{
 		data[x][y] = new Box();
 	    }
 	}
-	for(int i = 0;i < 20;i++){
-	    addNum();
+	data[0][0] = new Box(rand.nextInt(9)+1);
+	for(int i = 0;i < 10;i++){
+	    int x = rand.nextInt(9);
+	    int y = rand.nextInt(9);
+	    while(get(x,y) != 0){
+		x = rand.nextInt(9);
+	        y = rand.nextInt(9);
+	    }
+	    addNum(x,y);
 	}
-	for(int i = 0;i < 5;i++){
+	for(int i = 0;i < 20;i++){
 	    solve();
 	    int x = rand.nextInt(9);
 	    int y = rand.nextInt(9);
@@ -98,7 +106,7 @@ public class Sudoku{
 		}
 	    }
 	}
-	if(col == 9){
+	if(isSolved()){
 	    return true;
 	}
 	for(int value = 1;value < 10;value++){
@@ -115,21 +123,21 @@ public class Sudoku{
     /*
       adds a valid number to the puzzle
      */
-    private boolean addNum(){
-	int x = rand.nextInt(9);
-	int y = rand.nextInt(9);
-	while(get(x,y) != 0){
-	    x = rand.nextInt(9);
-	    y = rand.nextInt(9);
-	}
+    private boolean addNum(int x,int y){
+	data[x][y] = new Box();
 	int value = rand.nextInt(9) + 1;
-        data[x][y] = new Box(value);
-	while(!(isValid(x,y,value) && solve())){
-	    value = rand.nextInt(9) + 1;
+	if(isValid(x,y,value)){
 	    data[x][y] = new Box(value);
+	    if(solve()){
+		reset();
+		return true;
+	    }
 	}
-	reset();
-	return true;
+	data[x][y] = new Box();
+	if(addNum(x,y)){
+	    return true;
+	}
+	return false;
     }
     
     /*
